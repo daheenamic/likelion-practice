@@ -14,7 +14,7 @@ public class StaticExam {
         System.out.println(si); // static 변수 접근 가능
         smethod();
 
-        // 객체가 있어야 실행 가능 (new StaticExam().method();
+        // 객체가 있어야 실행 가능 new StaticExam().method();
         // 객체 내부를 다루는것이 목적이므로 인스턴스 필드/메서드와 static 필드/메서드 모두 접근 가능.
     }
 
