@@ -1,6 +1,7 @@
 package day12.logDir;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 public class IOPractice {
 
-    public static final String FILE_PATH = "/src/day12/logDir/";
+    public static final String FILE_PATH = "src/day12/logDir/";
     public static final String FILE_EXTENSION = ".txt";
 
     private static final BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in));
@@ -32,13 +33,13 @@ public class IOPractice {
                     String time = LocalDateTime.now().format(TS_FMT);
                     wr.println("[ACCESS] " + time);
 
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 }
             } catch (InterruptedException e1) {
                 throw new RuntimeException(e1);
             }
 
-            System.out.println("로그 생성 완료.");
+            System.out.println("로그 생성 완료");
 
         } catch (NumberFormatException e2) {
             System.err.println("숫자 형식 오류: " + e2.getMessage());
@@ -62,7 +63,7 @@ public class IOPractice {
                     String time = LocalDateTime.now().format(TS_FMT);
                     wr.println("[ERROR] " + time);
 
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 }
             } catch (InterruptedException e1) {
                 throw new RuntimeException(e1);
@@ -79,7 +80,28 @@ public class IOPractice {
 
     // 두개의 파일 merge 하는 메서드
     public static void mergeLog(String accessFileNm, String ErrorFileNm, String mergeFileNm) {
+        try (
+                BufferedReader aLogBr = new BufferedReader(new FileReader(FILE_PATH + accessFileNm + FILE_EXTENSION));
+                BufferedReader eLogBr = new BufferedReader(new FileReader(FILE_PATH + ErrorFileNm + FILE_EXTENSION));
+                PrintWriter wr = new PrintWriter(new FileWriter(FILE_PATH + mergeFileNm + FILE_EXTENSION));
+        ) {
+            System.out.println("로그 파일 병합 시작");
 
+            String line;
+
+            while((line = aLogBr.readLine()) != null) {
+                wr.println(line);
+            }
+
+            while((line = eLogBr.readLine()) != null) {
+                wr.println(line);
+            }
+
+            System.out.println("로그 파일 병합 완료");
+
+        } catch (IOException e) {
+            System.err.println("파일 오류:  " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
