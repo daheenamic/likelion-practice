@@ -1,0 +1,10 @@
+input.txt의 1번째 줄
+input.txt의 2번째 줄
+input.txt의 3번째 줄
+input.txt의 4번째 줄
+input.txt의 5번째 줄
+input.txt의 6번째 줄
+input.txt의 7번째 줄
+input.txt의 8번째 줄
+input.txt의 9번째 줄
+input.txt의 10번째 줄
